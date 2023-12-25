@@ -42,14 +42,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="/register">
-                            <i class="fa fa-shopping-cart" aria-hidden="true">
-                                <sup>1</sup>
-                            </i>
+                                <i class="fa fa-shopping-cart" aria-hidden="true">
+                                    <sup>1</sup>
+                                </i>
                             </a>
                         </li>
                         <li class="nav-item border border-light">
                             <a class="nav-link text-light" href="/register">
-                            Total Price : <span id="total_price">25000</span>
+                                Total Price : <span id="total_price">25000</span>
                             </a>
                         </li>
                     </ul>
@@ -61,6 +61,111 @@
             </div>
         </nav>
         <!-- End of Navbar -->
+
+
+        <!--  Second Nav -->
+        <nav class="navbar navbar-expand-lg bg-warning">
+            <div class="container-fluid">
+                <p class="text-light mb-0">
+                    Welcome ghost
+                </p>
+                <a href="/login" class="nav-link p-0">Login</a>
+            </div>
+        </nav>
+        <!-- End Second nav -->
+
+        <!-- Container Section -->
+
+        <div class="row mt-4">
+            <div class="col-md-10 me-auto ">
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <div class="card">
+                            <img src="assets/img/Google Pixel 8 Pro.jpg" class="card-img-top product__img" alt="product_img">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Add to Card</a>
+                                <a href="#" class="btn btn-outline-primary">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <div class="card">
+                            <img src="assets/img/All In One - msi 27inch.jpg" class="card-img-top product__img" alt="product_img">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Add to Card</a>
+                                <a href="#" class="btn btn-outline-primary">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <div class="card">
+                            <img src="assets/img/Mac Book Pro 2023 16inch MNWA3.jpg" class="card-img-top product__img" alt="product_img">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Add to Card</a>
+                                <a href="#" class="btn btn-outline-primary">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <div class="card">
+                            <img src="assets/img/ROG Strix SCAR 17 X3D G733PYV - asus_gaming.jpg" class="card-img-top product__img" alt="product_img">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Add to Card</a>
+                                <a href="#" class="btn btn-outline-primary">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-2 bg-primary-subtle p-0">
+                <div class="brands">
+                    <h4 class="bg-secondary text-light text-center p-2">Brands</h4>
+                    <ul class="navbar-nav me-auto mb-2 text-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <div class="categories">
+                <h4 class="bg-secondary text-light text-center p-2">Categories</h4>
+                    <ul class="navbar-nav me-auto mb-2 text-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <!-- <footer class="bg-primary text-light text-center">
+            <p>Made By Amin Ataei with ❤️</p>
+        </footer> -->
+
 
     </div>
 
