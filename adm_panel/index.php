@@ -1,3 +1,47 @@
+<?php
+
+include_once("../config/database.php");
+
+if (isset($_POST["categoryName"]) && strlen($_POST["categoryName"]) > 0) {
+    $categoryTitle = $_POST["categoryName"];
+    $allCategorycommand = "SELECT * FROM categories WHERE title = '$categoryTitle'";
+    $result = mysqli_query($conn, $allCategorycommand);
+    $numbers =  mysqli_num_rows($result);
+    if ( $numbers > 0) {
+        echo "<script>alert(New record created successfully)</script>";
+    } else {
+        $sqlCommand = "INSERT INTO categories (title) VALUES ('$categoryTitle')";
+        if (mysqli_query($conn, $sqlCommand)) {
+            echo "<script>alert(New record created successfully)</script>";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+        mysqli_close($conn);
+    }
+}
+
+
+if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
+    $brandTitle = $_POST["brandName"];
+    $allBrandscommand = "SELECT * FROM bramds WHERE title = '$brandTitle'";
+    $result = mysqli_query($conn, $allBrandscommand);
+    $numbers =  mysqli_num_rows($result);
+    if ( $numbers > 0) {
+        echo "<script>alert(New record created successfully)</script>";
+    } else {
+        $sqlCommand = "INSERT INTO brands (title) VALUES ('$brandTitle')";
+        if (mysqli_query($conn, $sqlCommand)) {
+            echo "<script>alert(New record created successfully)</script>";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+        mysqli_close($conn);
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
