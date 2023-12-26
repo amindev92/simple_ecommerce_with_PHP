@@ -23,7 +23,7 @@ if (isset($_POST["categoryName"]) && strlen($_POST["categoryName"]) > 0) {
 
 if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
     $brandTitle = $_POST["brandName"];
-    $allBrandscommand = "SELECT * FROM bramds WHERE title = '$brandTitle'";
+    $allBrandscommand = "SELECT * FROM brands WHERE title = '$brandTitle'";
     $result = mysqli_query($conn, $allBrandscommand);
     $numbers =  mysqli_num_rows($result);
     if ( $numbers > 0) {

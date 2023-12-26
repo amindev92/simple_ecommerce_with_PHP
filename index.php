@@ -1,3 +1,9 @@
+<?php
+
+include_once("config/database.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,31 +136,42 @@
                 <div class="brands">
                     <h4 class="bg-secondary text-light text-center p-2">Brands</h4>
                     <ul class="navbar-nav me-auto mb-2 text-center">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Active</a>
+                        <?php
+                        $allBrandscommand = "SELECT * FROM brands";
+                        $brands_result = mysqli_query($conn, $allBrandscommand);
+                        while ($row = mysqli_fetch_assoc($brands_result)) {
+                            $brandTitle = $row["title"];
+                            $brandId = $row["id"];
+                            echo "
+                        <li class='nav-item'>
+                            <a class='nav-link' href='index.php?$brandId'>$brandTitle</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        
+                        ";
+                        }
+
+                        ?>
+
                     </ul>
+
                 </div>
                 <div class="categories">
-                <h4 class="bg-secondary text-light text-center p-2">Categories</h4>
+                    <h4 class="bg-secondary text-light text-center p-2">Categories</h4>
                     <ul class="navbar-nav me-auto mb-2 text-center">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Active</a>
+                        <?php
+                        $allCategoriescommand = "SELECT * FROM categories";
+                        $categories_result = mysqli_query($conn, $allCategoriescommand);
+                        while ($row = mysqli_fetch_assoc($categories_result)) {
+                            $categoryTitle = $row["title"];
+                            $categoryId = $row["id"];
+                            echo "
+                        <li class='nav-item'>
+                            <a class='nav-link' href='index.php?$categoryId'>$categoryTitle</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        
+                        ";
+                        }
+
+                        ?>
+
                     </ul>
                 </div>
             </div>
