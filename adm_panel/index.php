@@ -12,22 +12,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Mobocom store_Admin Panel</title>
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
             overflow: hidden;
         }
-        .logo{
+
+        .logo {
             height: 50px;
             width: 50px;
         }
-        .profile_img{
+
+        .profile_img {
             width: 100px;
             height: 100px;
             object-fit: contain;
         }
-        footer{
+
+        footer {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -43,23 +46,33 @@
 
         <nav class="navbar navbar-expand-lg bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="../assets/img/mobocom_logo.png" alt="logo" class="logo">
                 </a>
-                
+
             </div>
         </nav>
 
         <div class="row vh-100">
 
-            <div class="col-md-8"></div>
+            <div class="col-md-8">
+                <?php
+                if (isset($_GET["insert_categories"])) {
+                    include_once("insertCategories.php");
+                }
+                if (isset($_GET["insert_brands"])) {
+                    include_once("insertBrands.php");
+                }
+                ?>
+
+            </div>
 
             <div class="col-md-4 bg-primary-subtle p-0">
                 <h4 class="bg-secondary text-light text-center p-2 mb-0">Menu</h4>
                 <div class=" me-auto text-center ">
                     <img src="../assets/img/user.jpg" alt="profile_image" class="profile_img rounded-5 ">
                 </div>
-                <ul class="navbar-nav  me-auto mb-2 mt-0 text-center">
+                <ul class="navbar-nav me-auto mb-2 mt-0 text-center">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Insert products</a>
                     </li>
@@ -67,13 +80,13 @@
                         <a class="nav-link" href="#">View Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Insert Categories</a>
+                        <a class="nav-link" href="index.php?insert_categories">Insert Categories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">View Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Insert Brands</a>
+                        <a class="nav-link" href="index.php?insert_brands">Insert Brands</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">View Brands</a>
@@ -96,7 +109,7 @@
         </div>
 
 
-         <!-- Footer -->
+        <!-- Footer -->
         <footer class="bg-primary text-light text-center">
             <p>Made By Amin Ataei with ❤️</p>
         </footer>
