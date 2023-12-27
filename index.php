@@ -140,8 +140,8 @@ include_once("config/database.php");
                         $allBrandscommand = "SELECT * FROM brands";
                         $brands_result = mysqli_query($conn, $allBrandscommand);
                         while ($row = mysqli_fetch_assoc($brands_result)) {
-                            $brandTitle = $row["title"];
-                            $brandId = $row["id"];
+                            $brandTitle = $row["brand_title"];
+                            $brandId = $row["brand_id"];
                             echo "
                         <li class='nav-item'>
                             <a class='nav-link' href='index.php?$brandId'>$brandTitle</a>
@@ -161,8 +161,8 @@ include_once("config/database.php");
                         $allCategoriescommand = "SELECT * FROM categories";
                         $categories_result = mysqli_query($conn, $allCategoriescommand);
                         while ($row = mysqli_fetch_assoc($categories_result)) {
-                            $categoryTitle = $row["title"];
-                            $categoryId = $row["id"];
+                            $categoryTitle = $row["category_title"];
+                            $categoryId = $row["category_id"];
                             echo "
                         <li class='nav-item'>
                             <a class='nav-link' href='index.php?$categoryId'>$categoryTitle</a>
@@ -179,9 +179,9 @@ include_once("config/database.php");
 
 
         <!-- Footer -->
-        <!-- <footer class="bg-primary text-light text-center">
+        <footer class="bg-primary text-light text-center">
             <p>Made By Amin Ataei with ❤️</p>
-        </footer> -->
+        </footer>
 
 
     </div>

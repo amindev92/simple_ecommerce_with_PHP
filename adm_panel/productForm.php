@@ -1,3 +1,47 @@
+<?php
+
+include_once("../config/database.php");
+
+if (isset($_POST["insertProduct"])) {
+
+    $product_title = $_POST["productTitle"];
+    $product_description = $_POST["productDescription"];
+    $product_keywords = $_POST["productKeywords"];
+    $category_id = $_POST["productCategory"];
+    $brands_id = $_POST["productBrand"];
+    $product_image1 = $_FILES["product_image1"]["name"];
+    $product_image2 = $_FILES["product_image2"]["name"];
+    $product_image3 = $_FILES["product_image3"]["name"];
+    $product_price = $_POST["productPrice"];
+    $status = "true";
+
+    $product_image1_temp = $_FILES["product_image1"]["tmp_name"];
+    $product_image2_temp = $_FILES["product_image2"]["tmp_name"];
+    $product_image3_temp = $_FILES["product_image3"]["tmp_name"];
+
+
+    if ($product_title == "" || $product_description == "" || $product_keywords == "" || $product_image1 == "" or $product_image2 == "" or $product_image3 == "") {
+        echo    "<script>alert('Please Fill input')</script>";
+    } else {
+        var_dump($_POST);
+        var_dump($_FILES);
+        move_uploaded_file($product_image1_temp, "./products_image/$product_image1");
+        move_uploaded_file($product_image2_temp, "./products_image/$product_image2");
+        move_uploaded_file($product_image3_temp, "./products_image/$product_image3");
+
+        $sqlCommand = "INSERT INTO products (product_title, product_description, product_keywords, category_id, brands_id, product_image1, product_image2, product_image3, product_price, date, status ) VALUES ('$product_title', '$product_description', '$product_keywords', '$category_id', '$brands_id', '$product_image1', '$product_image2', '$product_image3', '$product_price', NOW(), $status)";
+
+        $result = mysqli_query($conn, $sqlCommand);
+        if ($result > 0) {
+            echo    "<script>alert('Successfully to insert data on table')</script>";
+        } else {
+            die(mysqli_error($conn));
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,9 +62,9 @@
 
         footer {
             position: absolute;
-            bottom: -200px;
             left: 0;
             right: 0;
+
 
         }
     </style>
@@ -29,7 +73,7 @@
 
 <body>
 
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 h-full">
 
         <nav class="navbar navbar-expand-lg bg-primary">
             <div class="container-fluid">
@@ -40,7 +84,7 @@
             </div>
         </nav>
 
-        <div class="container mt-4 mx-auto h-100">
+        <div class="container mt-4 mx-auto">
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="productTitle" class="form-label">product Title</label>
@@ -54,15 +98,38 @@
                     <label for="productKeywords" class="form-label">Keywords:</label>
                     <input type="text" class="form-control" id="productKeywords" name="productKeywords" autocomplete="off" required="required">
                 </div>
-            
-                <select class="form-select mt-3" name="productCategory">
-                    <option selected>Select Category</option>
-                    <option value="1">One</option>
+                <div class="mb-3">
+                    <select class="form-select mt-3" name="productCategory">
+                        <option selected>Select Category</option>
+                        <?php
+                        $sqlCategoryCommand = "SELECT * FROM categories";
+                        $result = mysqli_query($conn, $sqlCategoryCommand);
+                        while ($item = mysqli_fetch_assoc($result)) {
+                            $categoryTitle = $item["category_title"];
+                            $categoryId = $item["category_id"];
+                            echo "
+                        <option value='$categoryId'>$categoryTitle</option>
+                        ";
+                        }
+                        ?>
+                </div>
                 </select>
-                <select class="form-select mt-3" name="productBrand">
-                    <option selected>Select Brand</option>
-                    <option value="1">One</option>
-                </select>
+                <div class="mb-3">
+                    <select class="form-select mt-3" name="productBrand">
+                        <option selected>Select brand</option>
+                        <?php
+                        $sqlBrandCommand = "SELECT * FROM brands";
+                        $result = mysqli_query($conn, $sqlBrandCommand);
+                        while ($item = mysqli_fetch_assoc($result)) {
+                            $brandTitle = $item["brand_title"];
+                            $brandId = $item["brand_id"];
+                            echo "
+                        <option value='$brandId'>$brandTitle</option>
+                        ";
+                        }
+                        ?>
+                    </select>
+                </div>
                 <div class="mb-3">
                     <label for="product_image1" class="form-label">Image 1:</label>
                     <input class="form-control" type="file" id="product_image1" name="product_image1" required="required" multiple>
@@ -80,18 +147,18 @@
                     <input type="text" class="form-control" id="productPrice" name="productPrice" autocomplete="off" required="required">
                 </div>
                 <div class="d-grid gap-2">
-                    <input type="submit" name="insertProduct" class="btn btn-primary mb-3" value="Add To product">
+                    <input type="submit" name="insertProduct" class="btn btn-primary mb-3" value="Add to products">
                 </div>
             </form>
         </div>
-
 
         <footer class="bg-primary text-light text-center">
             <p>Made By Amin Ataei with ❤️</p>
         </footer>
 
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 

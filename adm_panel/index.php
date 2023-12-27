@@ -4,13 +4,13 @@ include_once("../config/database.php");
 
 if (isset($_POST["categoryName"]) && strlen($_POST["categoryName"]) > 0) {
     $categoryTitle = $_POST["categoryName"];
-    $allCategorycommand = "SELECT * FROM categories WHERE title = '$categoryTitle'";
+    $allCategorycommand = "SELECT * FROM categories WHERE category_title = '$categoryTitle'";
     $result = mysqli_query($conn, $allCategorycommand);
     $numbers =  mysqli_num_rows($result);
     if ( $numbers > 0) {
         echo "<script>alert(New record created successfully)</script>";
     } else {
-        $sqlCommand = "INSERT INTO categories (title) VALUES ('$categoryTitle')";
+        $sqlCommand = "INSERT INTO categories (category_title) VALUES ('$categoryTitle')";
         if (mysqli_query($conn, $sqlCommand)) {
             echo "<script>alert(New record created successfully)</script>";
         } else {
@@ -23,13 +23,13 @@ if (isset($_POST["categoryName"]) && strlen($_POST["categoryName"]) > 0) {
 
 if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
     $brandTitle = $_POST["brandName"];
-    $allBrandscommand = "SELECT * FROM brands WHERE title = '$brandTitle'";
+    $allBrandscommand = "SELECT * FROM brands WHERE brand_title = '$brandTitle'";
     $result = mysqli_query($conn, $allBrandscommand);
     $numbers =  mysqli_num_rows($result);
     if ( $numbers > 0) {
         echo "<script>alert(New record created successfully)</script>";
     } else {
-        $sqlCommand = "INSERT INTO brands (title) VALUES ('$brandTitle')";
+        $sqlCommand = "INSERT INTO brands (brand_title) VALUES ('$brandTitle')";
         if (mysqli_query($conn, $sqlCommand)) {
             echo "<script>alert(New record created successfully)</script>";
         } else {
