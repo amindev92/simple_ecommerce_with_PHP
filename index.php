@@ -85,50 +85,36 @@ include_once("config/database.php");
         <div class="row mt-4">
             <div class="col-md-10 me-auto ">
                 <div class="row">
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="assets/img/Google Pixel 8 Pro.jpg" class="card-img-top product__img" alt="product_img">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Add to Card</a>
-                                <a href="#" class="btn btn-outline-primary">View more</a>
+                    <?php
+
+                    $sqlCommand = "SELECT * FROM products ORDER BY date ASC";
+                    $result = mysqli_query($conn, $sqlCommand);
+                    while ($item = mysqli_fetch_assoc($result)) {
+                        $product_title = $item["product_title"];
+                        $product_description = $item["product_description"];
+                        $product_keywords = $item["product_keywords"];
+                        $category_id = $item["category_id"];
+                        $brands_id = $item["brands_id"];
+                        $product_image1 = $item["product_image1"];
+                        $product_price = $item["product_price"];
+                        echo "
+                            <div class='col-md-4 mb-2'>
+                                <div class='card'>
+                                    <img src='./adm_panel/products_image/$product_image1' class='card-img-top product__img' alt='$product_title'>
+                                    <div class='card-body'>
+                                   <h5 class='card-title'>$product_title</h5>
+                                    <p class='card-text'>$product_description</p>
+                                  <a href='#' class='btn btn-primary'>Add to Card</a>
+                                  <a href='#' class='btn btn-outline-primary'>View more</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="assets/img/All In One - msi 27inch.jpg" class="card-img-top product__img" alt="product_img">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Add to Card</a>
-                                <a href="#" class="btn btn-outline-primary">View more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="assets/img/Mac Book Pro 2023 16inch MNWA3.jpg" class="card-img-top product__img" alt="product_img">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Add to Card</a>
-                                <a href="#" class="btn btn-outline-primary">View more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="card">
-                            <img src="assets/img/ROG Strix SCAR 17 X3D G733PYV - asus_gaming.jpg" class="card-img-top product__img" alt="product_img">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Add to Card</a>
-                                <a href="#" class="btn btn-outline-primary">View more</a>
-                            </div>
-                        </div>
-                    </div>
+                            ";
+                    }
+
+                    ?>
+
+
                 </div>
 
             </div>

@@ -89,7 +89,7 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
 
         <nav class="navbar navbar-expand-lg bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="/mobocom/">
                     <img src="../assets/img/mobocom_logo.png" alt="logo" class="logo">
                 </a>
 

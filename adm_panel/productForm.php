@@ -18,13 +18,12 @@ if (isset($_POST["insertProduct"])) {
     $product_image1_temp = $_FILES["product_image1"]["tmp_name"];
     $product_image2_temp = $_FILES["product_image2"]["tmp_name"];
     $product_image3_temp = $_FILES["product_image3"]["tmp_name"];
-
+    
 
     if ($product_title == "" || $product_description == "" || $product_keywords == "" || $product_image1 == "" or $product_image2 == "" or $product_image3 == "") {
         echo    "<script>alert('Please Fill input')</script>";
     } else {
-        var_dump($_POST);
-        var_dump($_FILES);
+
         move_uploaded_file($product_image1_temp, "./products_image/$product_image1");
         move_uploaded_file($product_image2_temp, "./products_image/$product_image2");
         move_uploaded_file($product_image3_temp, "./products_image/$product_image3");
@@ -92,7 +91,7 @@ if (isset($_POST["insertProduct"])) {
                 </div>
                 <div class="mb-3">
                     <label for="productDescription" class="form-label">Description:</label>
-                    <textarea class="form-control" id="productDescription" name="productDescription" rows="3" required="required"></textarea>
+                    <textarea  class="form-control" id="productDescription" name="productDescription" rows="3" required="required"></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="productKeywords" class="form-label">Keywords:</label>
