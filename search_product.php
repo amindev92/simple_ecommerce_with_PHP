@@ -60,7 +60,7 @@ include_once("helpers/commonFunction.php");
                             </a>
                         </li>
                     </ul>
-                    <form action="search_product.php" method="get" class="d-flex" role="search">
+                    <form action="" method="get" class="d-flex" role="search">
                         <input class="form-control" me-2" type="search" placeholder="Search" aria-label="Search" name="search_product">
                         <input class="btn btn-outline-light" type="submit" value="search" name="search_product_data">
                     </form>
@@ -87,10 +87,7 @@ include_once("helpers/commonFunction.php");
             <div class="col-md-10 me-auto ">
                 <div class="row">
                     <?php
-                    get_uniqe_brand();
-                    get_uniqe_category();
-                    getProducts();
-
+                    searchProducts();
                     ?>
 
 

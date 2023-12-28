@@ -1,5 +1,42 @@
 <?php
 
+function searchProducts()
+{
+
+    if (isset($_GET["search_product"]) && !empty($_GET["search_product"])) {
+        global $conn;
+        $searchProductKeyword = $_GET["search_product"];
+        $sqlCommand = "SELECT * FROM products WHERE product_keywords LIKE '%$searchProductKeyword%'";
+        $result = mysqli_query($conn, $sqlCommand);
+        if (mysqli_num_rows($result) <= 0) {
+            echo "<p>Not Product for this search</p>";
+        } else {
+            while ($item = mysqli_fetch_assoc($result)) {
+                $product_title = $item["product_title"];
+                $product_description = $item["product_description"];
+                $product_keywords = $item["product_keywords"];
+                $category_id = $item["category_id"];
+                $brands_id = $item["brand_id"];
+                $product_image1 = $item["product_image1"];
+                $product_price = $item["product_price"];
+                echo "
+                            <div class='col-md-4 mb-2'>
+                                <div class='card'>
+                                    <img src='./adm_panel/products_image/$product_image1' class='card-img-top product__img' alt='$product_title'>
+                                    <div class='card-body'>
+                                   <h5 class='card-title'>$product_title</h5>
+                                    <p class='card-text'>$product_description</p>
+                                  <a href='#' class='btn btn-primary'>Add to Card</a>
+                                  <a href='#' class='btn btn-outline-primary'>View more</a>
+                            </div>
+                        </div>
+                    </div>
+                            ";
+            }
+        }
+    }
+}
+
 function get_uniqe_category()
 {
     if (isset($_GET["category"]) && is_numeric($_GET["category"])) {
@@ -15,7 +52,43 @@ function get_uniqe_category()
                 $product_description = $item["product_description"];
                 $product_keywords = $item["product_keywords"];
                 $category_id = $item["category_id"];
-                $brands_id = $item["brands_id"];
+                $brands_id = $item["brand_id"];
+                $product_image1 = $item["product_image1"];
+                $product_price = $item["product_price"];
+                echo "
+                            <div class='col-md-4 mb-2'>
+                                <div class='card'>
+                                    <img src='./adm_panel/products_image/$product_image1' class='card-img-top product__img' alt='$product_title'>
+                                    <div class='card-body'>
+                                   <h5 class='card-title'>$product_title</h5>
+                                    <p class='card-text'>$product_description</p>
+                                  <a href='#' class='btn btn-primary'>Add to Card</a>
+                                  <a href='#' class='btn btn-outline-primary'>View more</a>
+                            </div>
+                        </div>
+                    </div>
+                            ";
+            }
+        }
+    }
+}
+
+function get_uniqe_brand()
+{
+    if (isset($_GET["brand"]) && is_numeric($_GET["brand"])) {
+        global $conn;
+        $brand_id = $_GET["brand"];
+        $sqlCommand = "SELECT * FROM products WHERE brand_id = $brand_id";
+        $result = mysqli_query($conn, $sqlCommand);
+        if (mysqli_num_rows($result) <= 0) {
+            echo "<p>Not Product for this category</p>";
+        } else {
+            while ($item = mysqli_fetch_assoc($result)) {
+                $product_title = $item["product_title"];
+                $product_description = $item["product_description"];
+                $product_keywords = $item["product_keywords"];
+                $category_id = $item["category_id"];
+                $brands_id = $item["brand_id"];
                 $product_image1 = $item["product_image1"];
                 $product_price = $item["product_price"];
                 echo "
@@ -81,7 +154,7 @@ function getProducts()
             $product_description = $item["product_description"];
             $product_keywords = $item["product_keywords"];
             $category_id = $item["category_id"];
-            $brands_id = $item["brands_id"];
+            $brands_id = $item["brand_id"];
             $product_image1 = $item["product_image1"];
             $product_price = $item["product_price"];
             echo "
