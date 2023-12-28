@@ -87,7 +87,7 @@ include_once("helpers/commonFunction.php");
             <div class="col-md-10 me-auto ">
                 <div class="row">
                     <?php
-
+                    get_uniqe_category();
                     getProducts();
 
                     ?>
