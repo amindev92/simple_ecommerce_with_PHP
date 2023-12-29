@@ -90,6 +90,7 @@ include_once("helpers/commonFunction.php");
                     get_uniqe_brand();
                     get_uniqe_category();
                     getProducts();
+                    addToCart();
 
                     ?>
 

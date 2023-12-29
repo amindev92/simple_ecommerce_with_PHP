@@ -1,5 +1,47 @@
 <?php
 
+function addToCart()
+{
+    global $conn;
+    if (isset($_GET["product_id"]) && is_numeric($_GET["product_id"]) && $_GET["product_id"] > 0) {
+
+        $product_id = $_GET["product_id"];
+        $userIp_address = getIPAddress();
+        $selectProducts = "SELECT * FROM cart_details WHERE product_id = '$product_id' and user_ip_address = '$userIp_address'";
+        $result = mysqli_query($conn, $selectProducts);
+        $numberOfRows = mysqli_num_rows($result);
+        if ($numberOfRows > 0) {
+            echo "<script>alert('already exist in table')</script>";
+            echo "<script>window.open('index.php')</script>";
+        }else{
+            $insertProductQuery = "INSERT INTO cart_details (product_id, user_ip_address, quantities) VALUES ('$product_id', '$userIp_address', 0)";
+            $result = mysqli_query($conn, $insertProductQuery);
+            echo "<script>alert('added product to cartList')</script>";
+            echo "<script>window.open('index.php')</script>";
+        }
+    }
+}
+
+
+function getIPAddress()
+{
+    //whether ip is from the share internet  
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }
+    //whether ip is from the proxy  
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    //whether ip is from the remote address  
+    else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+// $ip = getIPAddress();  
+// echo 'User Real IP Address - '.$ip;
+
 function viewProduct()
 {
     if (isset($_GET["product_id"]) && is_numeric($_GET["product_id"])) {
@@ -112,7 +154,7 @@ function get_uniqe_category()
                                     <div class='card-body'>
                                    <h5 class='card-title'>$product_title</h5>
                                     <p class='card-text'>$product_description</p>
-                                  <a href='#' class='btn btn-primary'>Add to Card</a>
+                                  <a href='index.php?product_id=$product_id' class='btn btn-primary'>Add to Card</a>
                                   <a href='product_details.php?product_id=$product_id' class='btn btn-outline-primary'>View more</a>
                             </div>
                         </div>
@@ -149,7 +191,7 @@ function get_uniqe_brand()
                                     <div class='card-body'>
                                    <h5 class='card-title'>$product_title</h5>
                                     <p class='card-text'>$product_description</p>
-                                  <a href='#' class='btn btn-primary'>Add to Card</a>
+                                  <a href='index.php?product_id=$product_id' class='btn btn-primary'>Add to Card</a>
                                   <a href='product_details.php?product_id=$product_id' class='btn btn-outline-primary'>View more</a>
                             </div>
                         </div>
@@ -216,7 +258,7 @@ function getProducts()
                                     <div class='card-body'>
                                    <h5 class='card-title'>$product_title</h5>
                                     <p class='card-text'>$product_description</p>
-                                  <a href='#' class='btn btn-primary'>Add to Card</a>
+                                  <a href='index.php?product_id=$product_id' class='btn btn-primary'>Add to Card</a>
                                   <a href='product_details.php?product_id=$product_id' class='btn btn-outline-primary'>View more</a>
                             </div>
                         </div>
