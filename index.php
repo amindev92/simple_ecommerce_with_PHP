@@ -56,7 +56,7 @@ include_once("helpers/commonFunction.php");
                         </li>
                         <li class="nav-item border border-light">
                             <a class="nav-link text-light" href="/register">
-                                Total Price : <span id="total_price">25000</span>
+                                Total Price : <span id="total_price"><?php getTotalPrice(); ?></span>
                             </a>
                         </li>
                     </ul>

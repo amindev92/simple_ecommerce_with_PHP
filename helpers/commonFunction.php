@@ -1,5 +1,27 @@
 <?php
 
+function getTotalPrice()
+{
+
+    global $conn;
+    $totalPrice = 0;
+    $userIp_address = getIPAddress();
+    $selectCartItems = "SELECT * FROM cart_details WHERE user_ip_address = '$userIp_address'";
+    $result = mysqli_query($conn, $selectCartItems);
+    while ($item = mysqli_fetch_array($result)) {
+
+        $product_id = $item["product_id"];
+        $selectProductQuery = "SELECT * FROM products WHERE product_id = '$product_id'";
+        $productResult = mysqli_query($conn, $selectProductQuery);
+        $product = mysqli_fetch_array($productResult);
+        // while ($product = mysqli_fetch_array($productResult)) {
+
+            $totalPrice += $product["product_price"];
+        // }
+    }
+    echo $totalPrice ;
+}
+
 function getNumberOfProduct()
 {
 
@@ -165,6 +187,7 @@ function get_uniqe_category()
                                     <div class='card-body'>
                                    <h5 class='card-title'>$product_title</h5>
                                     <p class='card-text'>$product_description</p>
+                                    <p class='card-text'>$$product_price</p>
                                   <a href='index.php?product_id=$product_id' class='btn btn-primary'>Add to Card</a>
                                   <a href='product_details.php?product_id=$product_id' class='btn btn-outline-primary'>View more</a>
                             </div>
@@ -202,6 +225,7 @@ function get_uniqe_brand()
                                     <div class='card-body'>
                                    <h5 class='card-title'>$product_title</h5>
                                     <p class='card-text'>$product_description</p>
+                                    <p class='card-text'>$$product_price</p>
                                   <a href='index.php?product_id=$product_id' class='btn btn-primary'>Add to Card</a>
                                   <a href='product_details.php?product_id=$product_id' class='btn btn-outline-primary'>View more</a>
                             </div>
@@ -264,11 +288,12 @@ function getProducts()
             $product_price = $item["product_price"];
             echo "
                             <div class='col-md-4 mb-2'>
-                                <div class='card'>
+                                <div class='card  product_cart'>
                                     <img src='./adm_panel/products_image/$product_image1' class='card-img-top product__img' alt='$product_title'>
                                     <div class='card-body'>
                                    <h5 class='card-title'>$product_title</h5>
                                     <p class='card-text'>$product_description</p>
+                                    <p class='card-text'>$$product_price</p>
                                   <a href='index.php?product_id=$product_id' class='btn btn-primary'>Add to Card</a>
                                   <a href='product_details.php?product_id=$product_id' class='btn btn-outline-primary'>View more</a>
                             </div>
