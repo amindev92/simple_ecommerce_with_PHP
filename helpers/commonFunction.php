@@ -1,5 +1,16 @@
 <?php
 
+function getNumberOfProduct()
+{
+
+    global $conn;
+    $userIp_address = getIPAddress();
+    $selectProducts = "SELECT * FROM cart_details WHERE user_ip_address = '$userIp_address'";
+    $result = mysqli_query($conn, $selectProducts);
+    $numberOfRows = mysqli_num_rows($result);
+    echo $numberOfRows;
+}
+
 function addToCart()
 {
     global $conn;
@@ -13,11 +24,11 @@ function addToCart()
         if ($numberOfRows > 0) {
             echo "<script>alert('already exist in table')</script>";
             echo "<script>window.open('index.php')</script>";
-        }else{
+        } else {
             $insertProductQuery = "INSERT INTO cart_details (product_id, user_ip_address, quantities) VALUES ('$product_id', '$userIp_address', 0)";
             $result = mysqli_query($conn, $insertProductQuery);
             echo "<script>alert('added product to cartList')</script>";
-            echo "<script>window.open('index.php')</script>";
+            echo "<script>window.open('index.php', '_self')</script>";
         }
     }
 }

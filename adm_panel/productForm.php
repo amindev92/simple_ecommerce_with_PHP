@@ -28,7 +28,7 @@ if (isset($_POST["insertProduct"])) {
         move_uploaded_file($product_image2_temp, "./products_image/$product_image2");
         move_uploaded_file($product_image3_temp, "./products_image/$product_image3");
 
-        $sqlCommand = "INSERT INTO products (product_title, product_description, product_keywords, category_id, brands_id, product_image1, product_image2, product_image3, product_price, date, status ) VALUES ('$product_title', '$product_description', '$product_keywords', '$category_id', '$brands_id', '$product_image1', '$product_image2', '$product_image3', '$product_price', NOW(), $status)";
+        $sqlCommand = "INSERT INTO products (product_title, product_description, product_keywords, category_id, brand_id, product_image1, product_image2, product_image3, product_price, date, status ) VALUES ('$product_title', '$product_description', '$product_keywords', '$category_id', '$brands_id', '$product_image1', '$product_image2', '$product_image3', '$product_price', NOW(), $status)";
 
         $result = mysqli_query($conn, $sqlCommand);
         if ($result > 0) {

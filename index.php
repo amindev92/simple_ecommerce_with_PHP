@@ -50,7 +50,7 @@ include_once("helpers/commonFunction.php");
                         <li class="nav-item">
                             <a class="nav-link text-light" href="/register">
                                 <i class="fa fa-shopping-cart" aria-hidden="true">
-                                    <sup>1</sup>
+                                    <sup><?php getNumberOfProduct(); ?></sup>
                                 </i>
                             </a>
                         </li>

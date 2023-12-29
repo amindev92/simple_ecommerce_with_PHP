@@ -117,7 +117,7 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
                 </div>
                 <ul class="navbar-nav me-auto mb-2 mt-0 text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Insert products</a>
+                        <a class="nav-link" href="productForm.php">Insert products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">View Products</a>
