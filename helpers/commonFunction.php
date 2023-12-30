@@ -13,6 +13,7 @@ function getCartItem()
         $result = mysqli_query($conn, $selectProductQuery);
         $product = mysqli_fetch_array($result);
         // while ($product = mysqli_fetch_array($result)) {
+            $productId = $product["product_id"];
             $productTitle = $product["product_title"];
             $productImg = $product["product_image1"];
             $productPrice = $product["product_price"];
@@ -23,15 +24,15 @@ function getCartItem()
                         <img src='./adm_panel/products_image/$productImg' alt='$productTitle' class='productImg'>
                     </td>
                     <td>
-                        <input type='text' name='quantityProduct'>
+                        <input type='text' class='form-control' id='productQuantity' name='qty'>
                     </td>
                     <td>+$productPrice</td>
                     <td>
                         <input type='checkbox' name='removeCheck'>
                     </td>
                     <td>
+                        <button type='submit' name='updateCartItem' value='$productId' class ='btn btn-primary'>Update Cart</button>
                         <button class ='btn btn-primary'>Remove</button>
-                        <button class ='btn btn-primary'>Update</button>
                         
                     </td>
                 </tr>
@@ -52,12 +53,13 @@ function getTotalPrice()
     while ($item = mysqli_fetch_array($result)) {
 
         $product_id = $item["product_id"];
+        $product_quantity = $item["quantities"];
         $selectProductQuery = "SELECT * FROM products WHERE product_id = '$product_id'";
         $productResult = mysqli_query($conn, $selectProductQuery);
         $product = mysqli_fetch_array($productResult);
         // while ($product = mysqli_fetch_array($productResult)) {
-
-        $totalPrice += $product["product_price"];
+        $productPrice = $product["product_price"] * $product_quantity;
+        $totalPrice += $productPrice;
         // }
     }
     echo $totalPrice;
@@ -90,7 +92,7 @@ function addToCart()
             echo "<script>alert('already exist in table')</script>";
             echo "<script>window.open('index.php')</script>";
         } else {
-            $insertProductQuery = "INSERT INTO cart_details (product_id, user_ip_address, quantities) VALUES ('$product_id', '$userIp_address', 0)";
+            $insertProductQuery = "INSERT INTO cart_details (product_id, user_ip_address, quantities) VALUES ('$product_id', '$userIp_address', 1)";
             $result = mysqli_query($conn, $insertProductQuery);
             echo "<script>alert('added product to cartList')</script>";
             echo "<script>window.open('index.php', '_self')</script>";

@@ -3,6 +3,16 @@
 include_once("config/database.php");
 include_once("helpers/commonFunction.php");
 
+if (isset($_POST["updateCartItem"]) and is_numeric($_POST["updateCartItem"])) {
+
+    global $conn;
+    $userIp_address = getIPAddress();
+    $productQuantities = $_POST["qty"];
+    $productId = $_POST["updateCartItem"];
+    $updateQuantityProductQuery = "UPDATE cart_details SET quantities = '$productQuantities' WHERE user_ip_address = '$userIp_address' and product_id = '$productId'";
+    $updateQuantityProductResult = mysqli_query($conn, $updateQuantityProductQuery);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +90,7 @@ include_once("helpers/commonFunction.php");
                         </li>
                     </ul>
                     <form action="search_product.php" method="get" class="d-flex" role="search">
-                        <input class="form-control" me-2" type="search" placeholder="Search" aria-label="Search" name="search_product">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_product">
                         <input class="btn btn-outline-light" type="submit" value="search" name="search_product_data">
                     </form>
                 </div>
@@ -107,39 +117,41 @@ include_once("helpers/commonFunction.php");
             <div class="container px-5 me-auto">
                 <div class="row">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">product Title</th>
-                                <th scope="col">product Image</th>
-                                <th scope="col">Quantities</th>
-                                <th scope="col">Total Price</th>
-                                <th scope="col">Remove</th>
-                                <th scope="col">Operations</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <form action="" method="post">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">product Title</th>
+                                    <th scope="col">product Image</th>
+                                    <th scope="col">Quantities</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Remove</th>
+                                    <th scope="col">Operations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <?php
-                            getCartItem();
-                            ?>
-                        </tbody>
-                    </table>
+                                <?php
+                                getCartItem();
+                                ?>
+                            </tbody>
+                        </table>
 
-                    <div class="container">
-                        <div class="d-flex">
+                        <div class="container">
+                            <div class="d-flex">
 
-                            <h4 class="px-4">
-                                Total price: <strong>1000</strong>
-                            </h4>
-                            <a class="btn btn-primary" href="index.php">
-                                countinue Shopping
-                            </a>
-                            <a class="btn btn-primary" href="#">
-                                Checkout
-                            </a>
+                                <h4 class="px-4">
+                                    Total price: <strong><?php getTotalPrice(); ?></strong>
+                                </h4>
+                                <a class="btn btn-primary" href="index.php">
+                                    countinue Shopping
+                                </a>
+                                <a class="btn btn-primary" href="#">
+                                    Checkout
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </form>
 
                 </div>
             </div>
