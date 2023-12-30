@@ -1,5 +1,46 @@
 <?php
 
+function getCartItem()
+{
+
+    global $conn;
+    $userIp_address = getIPAddress();
+    $selectCartItems = "SELECT * FROM cart_details WHERE user_ip_address = '$userIp_address'";
+    $result_products = mysqli_query($conn, $selectCartItems);
+    while ($item = mysqli_fetch_array($result_products)) {
+        $productId = $item["product_id"];
+        $selectProductQuery = "SELECT * FROM products WHERE product_id = '$productId'";
+        $result = mysqli_query($conn, $selectProductQuery);
+        $product = mysqli_fetch_array($result);
+        // while ($product = mysqli_fetch_array($result)) {
+            $productTitle = $product["product_title"];
+            $productImg = $product["product_image1"];
+            $productPrice = $product["product_price"];
+            echo "
+                <tr>
+                    <td>$productTitle</td>
+                    <td>
+                        <img src='./adm_panel/products_image/$productImg' alt='$productTitle' class='productImg'>
+                    </td>
+                    <td>
+                        <input type='text' name='quantityProduct'>
+                    </td>
+                    <td>+$productPrice</td>
+                    <td>
+                        <input type='checkbox' name='removeCheck'>
+                    </td>
+                    <td>
+                        <button class ='btn btn-primary'>Remove</button>
+                        <button class ='btn btn-primary'>Update</button>
+                        
+                    </td>
+                </tr>
+    ";
+        }
+    // }
+    
+}
+
 function getTotalPrice()
 {
 
@@ -16,10 +57,11 @@ function getTotalPrice()
         $product = mysqli_fetch_array($productResult);
         // while ($product = mysqli_fetch_array($productResult)) {
 
-            $totalPrice += $product["product_price"];
+        $totalPrice += $product["product_price"];
         // }
     }
-    echo $totalPrice ;
+    echo $totalPrice;
+   
 }
 
 function getNumberOfProduct()
@@ -31,6 +73,7 @@ function getNumberOfProduct()
     $result = mysqli_query($conn, $selectProducts);
     $numberOfRows = mysqli_num_rows($result);
     echo $numberOfRows;
+   
 }
 
 function addToCart()
@@ -53,6 +96,7 @@ function addToCart()
             echo "<script>window.open('index.php', '_self')</script>";
         }
     }
+   
 }
 
 
@@ -120,6 +164,7 @@ function viewProduct()
     </div>
                             ";
     }
+   
 }
 
 
@@ -159,6 +204,7 @@ function searchProducts()
             }
         }
     }
+  
 }
 
 function get_uniqe_category()
@@ -197,6 +243,7 @@ function get_uniqe_category()
             }
         }
     }
+  
 }
 
 function get_uniqe_brand()
@@ -235,6 +282,7 @@ function get_uniqe_brand()
             }
         }
     }
+  
 }
 
 function getCategories()
@@ -251,6 +299,7 @@ function getCategories()
     </li>
     ";
     }
+  
 }
 
 function getBrands()
@@ -268,6 +317,7 @@ function getBrands()
                         </li>
                         ";
     }
+   
 }
 
 function getProducts()
@@ -302,4 +352,5 @@ function getProducts()
                             ";
         }
     }
+   
 }

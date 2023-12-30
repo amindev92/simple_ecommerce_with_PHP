@@ -15,9 +15,28 @@ include_once("helpers/commonFunction.php");
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Mobocom Store</title>
+    <title>Cart Table</title>
+    <style>
+        .logo {
+            width: 48px;
+            height: 48px;
+        }
+
+        .productImg {
+            width: 80px;
+            height: 80px;
+        }
+
+        footer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 5rem;
+            bottom: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,7 +67,7 @@ include_once("helpers/commonFunction.php");
                             <a class="nav-link text-light" href="/contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="cartTable.php">
+                            <a class="nav-link text-light" href="/register">
                                 <i class="fa fa-shopping-cart" aria-hidden="true">
                                     <sup><?php getNumberOfProduct(); ?></sup>
                                 </i>
@@ -84,43 +103,47 @@ include_once("helpers/commonFunction.php");
         <!-- Container Section -->
 
         <div class="row mt-4">
-            <div class="col-md-10 me-auto ">
+
+            <div class="container px-5 me-auto">
                 <div class="row">
-                    <?php
-                    get_uniqe_brand();
-                    get_uniqe_category();
-                    getProducts();
-                    addToCart();
 
-                    ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">product Title</th>
+                                <th scope="col">product Image</th>
+                                <th scope="col">Quantities</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Remove</th>
+                                <th scope="col">Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
+                            <?php
+                            getCartItem();
+                            ?>
+                        </tbody>
+                    </table>
+
+                    <div class="container">
+                        <div class="d-flex">
+
+                            <h4 class="px-4">
+                                Total price: <strong>1000</strong>
+                            </h4>
+                            <a class="btn btn-primary" href="index.php">
+                                countinue Shopping
+                            </a>
+                            <a class="btn btn-primary" href="#">
+                                Checkout
+                            </a>
+                        </div>
+                    </div>
 
                 </div>
-
             </div>
-            <div class="col-md-2 bg-primary-subtle p-0">
-                <div class="brands">
-                    <h4 class="bg-secondary text-light text-center p-2">Brands</h4>
-                    <ul class="navbar-nav me-auto mb-2 text-center">
-                        <?php
-                        getBrands();
 
-                        ?>
-
-                    </ul>
-
-                </div>
-                <div class="categories">
-                    <h4 class="bg-secondary text-light text-center p-2">Categories</h4>
-                    <ul class="navbar-nav me-auto mb-2 text-center">
-                        <?php
-                        getCategories();
-
-                        ?>
-
-                    </ul>
-                </div>
-            </div>
         </div>
 
 
