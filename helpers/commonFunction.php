@@ -24,7 +24,7 @@ function getCartItem()
                         <img src='./adm_panel/products_image/$productImg' alt='$productTitle' class='productImg'>
                     </td>
                     <td>
-                        <input type='text' class='form-control' id='productQuantity' name='qty'>
+                        <input type='text' class='form-control' id='productQuantity' name='qty[]'>
                     </td>
                     <td>+$productPrice</td>
                     <td>

@@ -7,10 +7,15 @@ if (isset($_POST["updateCartItem"]) and is_numeric($_POST["updateCartItem"])) {
 
     global $conn;
     $userIp_address = getIPAddress();
-    $productQuantities = $_POST["qty"];
-    $productId = $_POST["updateCartItem"];
-    $updateQuantityProductQuery = "UPDATE cart_details SET quantities = '$productQuantities' WHERE user_ip_address = '$userIp_address' and product_id = '$productId'";
-    $updateQuantityProductResult = mysqli_query($conn, $updateQuantityProductQuery);
+    foreach ($_POST["qty"] as $qtyValue) {
+        if (empty($qtyValue) and !is_numeric($qtyValue)) {
+            continue;
+        }
+        $productQuantities =$qtyValue;
+        $productId = $_POST["updateCartItem"];
+        $updateQuantityProductQuery = "UPDATE cart_details SET quantities = '$productQuantities' WHERE user_ip_address = '$userIp_address' and product_id = '$productId'";
+        $updateQuantityProductResult = mysqli_query($conn, $updateQuantityProductQuery);
+    }
 }
 
 if (isset($_POST["removeCartItem"])) {
@@ -21,10 +26,9 @@ if (isset($_POST["removeCartItem"])) {
         $deleteProductQuery = "DELETE FROM cart_details WHERE product_id = '$productId'";
         $deleteProductResult = mysqli_query($conn, $deleteProductQuery);
         if ($deleteProductResult) {
-            echo "<script>Delete successfull</script>" ;
+            echo "<script>Delete successfull</script>";
         }
     }
-   
 }
 
 ?>
