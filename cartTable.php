@@ -13,6 +13,20 @@ if (isset($_POST["updateCartItem"]) and is_numeric($_POST["updateCartItem"])) {
     $updateQuantityProductResult = mysqli_query($conn, $updateQuantityProductQuery);
 }
 
+if (isset($_POST["removeCartItem"])) {
+
+    foreach ($_POST["removeItem"] as $productId) {
+        global $conn;
+        $userIp_address = getIPAddress();
+        $deleteProductQuery = "DELETE FROM cart_details WHERE product_id = '$productId'";
+        $deleteProductResult = mysqli_query($conn, $deleteProductQuery);
+        if ($deleteProductResult) {
+            echo "<script>Delete successfull</script>" ;
+        }
+    }
+   
+}
+
 ?>
 
 <!DOCTYPE html>

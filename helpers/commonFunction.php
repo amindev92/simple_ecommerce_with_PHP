@@ -28,11 +28,11 @@ function getCartItem()
                     </td>
                     <td>+$productPrice</td>
                     <td>
-                        <input type='checkbox' name='removeCheck'>
+                        <input type='checkbox' name='removeItem[]' value='$productId'>
                     </td>
                     <td>
                         <button type='submit' name='updateCartItem' value='$productId' class ='btn btn-primary'>Update Cart</button>
-                        <button class ='btn btn-primary'>Remove</button>
+                        <button  type='submit' name='removeCartItem' class ='btn btn-primary'>Remove</button>
                         
                     </td>
                 </tr>
