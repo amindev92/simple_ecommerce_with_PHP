@@ -27,7 +27,7 @@ include_once("helpers/commonFunction.php");
 
         <nav class="navbar navbar-expand-lg bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/mobocom">
                     <img src="assets/img/mobocom_logo.png" alt="logo" class="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,16 +36,16 @@ include_once("helpers/commonFunction.php");
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li class="nav-item ">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link active" aria-current="page" href="/mobocom">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/products">Products</a>
+                            <a class="nav-link text-light" href="#">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/register">Register</a>
+                            <a class="nav-link text-light" href="/mobocom/user_area/userRegister.php">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/contact">Contact</a>
+                            <a class="nav-link text-light" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="cartTable.php">
@@ -56,7 +56,7 @@ include_once("helpers/commonFunction.php");
                         </li>
                         <li class="nav-item border border-light">
                             <a class="nav-link text-light" href="/register">
-                                Total Price : <span id="total_price">25000</span>
+                                Total Price : <span id="total_price"><?php getTotalPrice(); ?></span>
                             </a>
                         </li>
                     </ul>
@@ -76,7 +76,7 @@ include_once("helpers/commonFunction.php");
                 <p class="text-light mb-0">
                     Welcome ghost
                 </p>
-                <a href="/login" class="nav-link p-0">Login</a>
+                <a href="user_area/userLogin.php" class="nav-link p-0">Login</a>
             </div>
         </nav>
         <!-- End Second nav -->

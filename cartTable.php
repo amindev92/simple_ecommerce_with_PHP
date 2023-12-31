@@ -81,7 +81,7 @@ if (isset($_POST["removeCartItem"])) {
 
         <nav class="navbar navbar-expand-lg bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/mobocom">
                     <img src="assets/img/mobocom_logo.png" alt="logo" class="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,19 +90,19 @@ if (isset($_POST["removeCartItem"])) {
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li class="nav-item ">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link active" aria-current="page" href="/mobocom">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/products">Products</a>
+                            <a class="nav-link text-light" href="#">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/register">Register</a>
+                            <a class="nav-link text-light" href="/mobocom/user_area/userRegister.php">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/contact">Contact</a>
+                            <a class="nav-link text-light" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/register">
+                            <a class="nav-link text-light" href="cartTable.php">
                                 <i class="fa fa-shopping-cart" aria-hidden="true">
                                     <sup><?php getNumberOfProduct(); ?></sup>
                                 </i>
@@ -115,7 +115,7 @@ if (isset($_POST["removeCartItem"])) {
                         </li>
                     </ul>
                     <form action="search_product.php" method="get" class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_product">
+                        <input class="form-control" me-2" type="search" placeholder="Search" aria-label="Search" name="search_product">
                         <input class="btn btn-outline-light" type="submit" value="search" name="search_product_data">
                     </form>
                 </div>
@@ -130,7 +130,7 @@ if (isset($_POST["removeCartItem"])) {
                 <p class="text-light mb-0">
                     Welcome ghost
                 </p>
-                <a href="/login" class="nav-link p-0">Login</a>
+                <a href="user_area/userLogin.php" class="nav-link p-0">Login</a>
             </div>
         </nav>
         <!-- End Second nav -->
