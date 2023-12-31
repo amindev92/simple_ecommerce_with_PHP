@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_POST["userlogin"])){
+if (isset($_POST["userlogin"])) {
 
     $user_email = $_POST["user_email"];
     $user_password = $_POST["user_password"];
@@ -8,19 +8,34 @@ if(isset($_POST["userlogin"])){
     $selectUser = mysqli_query($conn, $selectUserQuery);
     $rowCountOfUserData  = mysqli_num_rows($selectUser);
     $fetchUserData = mysqli_fetch_array($selectUser);
-    if($rowCountOfUserData > 0){
-        if(password_verify($user_password, $fetchUserData["user_password"])){
-            $_SESSION["user_name"] = $fetchUserData["user_name"];
-            echo "<script>alert('login successfully!')</script>";
-            echo "<script>window.open('payment.php', '_self')</script>";
-        }else{
+
+
+    $userIp_address = getIPAddress();
+    $selectCartQuery = "SELECT * FROM cart_details WHERE user_ip_address = '$userIp_address'";
+    $resultCartQuery = mysqli_query($conn, $selectCartQuery);
+    $rowCountOfCart = mysqli_num_rows($resultCartQuery);
+    if ($rowCountOfUserData > 0) {
+
+        if (password_verify($user_password, $fetchUserData["user_password"])) {
+            if ($rowCountOfUserData == 1 and $rowCountOfCart == 0) {
+                $_SESSION["user_name"] = $fetchUserData["user_name"];
+                echo "<script>alert('login successfully!')</script>";
+                echo "<script>window.open('user_area/profile.php', '_self')</script>";
+            } else {
+                $_SESSION["user_name"] = $fetchUserData["user_name"];
+                echo "<script>alert('login successfully!')</script>";
+                echo "<script>window.open('payment.php', '_self')</script>";
+            }
+        } else {
             echo "<script>alert('Invalid Credential!')</script>";
             echo "<script>window.open('index.php', '_self')</script>";
         }
-    }else{
+    } else {
         echo "<script>alert('Invalid Credential!')</script>";
+        echo "<script>window.open('index.php', '_self')</script>";
     }
 }
+
 
 
 ?>
