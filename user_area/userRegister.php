@@ -16,14 +16,23 @@ if (isset($_POST["registerUser"])) {
     move_uploaded_file($user_img_tmp, "./userImages/$user_img");
     $hass_password = password_hash($user_password, PASSWORD_DEFAULT);
 
-    $insetUserDataQuery = "
+    $selectUserQuery = "
+        SELECT * FROM person WHERE user_name LIKE '%$user_name%' or user_email LIKE '%$user_email%' 
+    ";
+    $resultSelectUserQuery = mysqli_query($conn, $selectUserQuery);
+    $numberRowOfResultSelectUser = mysqli_num_rows($resultSelectUserQuery);
+    if ($numberRowOfResultSelectUser > 0) {
+        echo "<script>alert('Already user exist.')</script>";
+    } else {
+
+        $insetUserDataQuery = "
     INSERT INTO `person` (`user_name`, `user_email`, `user_password`, `user_img`, `user_ip`, `user_address`, `user_mobile`) VALUES ('$user_name', '$user_email', '$hass_password', '$user_img', '$user_ip', '$user_address', '$user_mobile');
     ";
-    $resultInsertUserData = mysqli_query($conn, $insetUserDataQuery);
-    if ($resultInsertUserData){
-        echo "<script>alert('successfully register user')</script>";
-        header("Location:../index.php");
-
+        $resultInsertUserData = mysqli_query($conn, $insetUserDataQuery);
+        if ($resultInsertUserData) {
+            echo "<script>alert('successfully register user')</script>";
+            header("Location:../index.php");
+        }
     }
 }
 
