@@ -103,10 +103,10 @@ include_once("helpers/commonFunction.php");
                 <?php
 
 
-                if (!isset($_SESSION["username"])) {
-                    include "user_area/userLogin.php";
+                if (!isset($_SESSION["user_name"])) {
+                    include_once "user_area/userLogin.php";
                 } else {
-                    include "payment.php";
+                    include_once "payment.php";
                 }
 
 
