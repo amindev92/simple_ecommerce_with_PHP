@@ -3,41 +3,6 @@
 include_once("config/database.php");
 include_once("helpers/commonFunction.php");
 
-if (isset($_POST["updateCartItem"]) and is_numeric($_POST["updateCartItem"])) {
-
-    global $conn;
-    $userIp_address = getIPAddress();
-    foreach ($_POST["qty"] as $qtyValue) {
-        if (empty($qtyValue) and !is_numeric($qtyValue)) {
-            continue;
-        }
-        $productQuantities = $qtyValue;
-        $productId = $_POST["updateCartItem"];
-        $updateQuantityProductQuery = "UPDATE cart_details SET quantities = '$productQuantities' WHERE user_ip_address = '$userIp_address' and product_id = '$productId'";
-        $updateQuantityProductResult = mysqli_query($conn, $updateQuantityProductQuery);
-    }
-}
-
-if (isset($_POST["removeCartItem"])) {
-
-    if (!isset($_POST["removeItem"])) {
-        echo "<script>alert('Please select at least one item to remove')</script>";
-        // header("Location:cartTable.php");
-        echo "<script>window.load('cartTable.php','_self')</script>";
-    } else {
-        foreach ($_POST["removeItem"] as $productId) {
-            global $conn;
-            $userIp_address = getIPAddress();
-            $deleteProductQuery = "DELETE FROM cart_details WHERE product_id = '$productId'";
-            $deleteProductResult = mysqli_query($conn, $deleteProductQuery);
-            if ($deleteProductResult) {
-                echo "<script>Delete successfull</script>";
-            }
-        }
-    }
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -50,19 +15,15 @@ if (isset($_POST["removeCartItem"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Cart Table</title>
+    <title>checkout</title>
     <style>
         .logo {
             width: 48px;
             height: 48px;
         }
 
-        .productImg {
-            width: 80px;
-            height: 80px;
-        }
+
 
         footer {
             position: absolute;
@@ -102,7 +63,7 @@ if (isset($_POST["removeCartItem"])) {
                             <a class="nav-link text-light" href="/contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/register">
+                            <a class="nav-link text-light" href="cartTable.php">
                                 <i class="fa fa-shopping-cart" aria-hidden="true">
                                     <sup><?php getNumberOfProduct(); ?></sup>
                                 </i>
@@ -115,7 +76,7 @@ if (isset($_POST["removeCartItem"])) {
                         </li>
                     </ul>
                     <form action="search_product.php" method="get" class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_product">
+                        <input class="form-control" me-2" type="search" placeholder="Search" aria-label="Search" name="search_product">
                         <input class="btn btn-outline-light" type="submit" value="search" name="search_product_data">
                     </form>
                 </div>
@@ -135,50 +96,22 @@ if (isset($_POST["removeCartItem"])) {
         </nav>
         <!-- End Second nav -->
 
-        <!-- Container Section -->
+        <div class="container my-4">
 
-        <div class="row mt-4">
+            <div class="row">
 
-            <div class="container px-5 me-auto">
-                <div class="row">
+                <?php
 
-                    <form action="" method="post">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">product Title</th>
-                                    <th scope="col">product Image</th>
-                                    <th scope="col">Quantities</th>
-                                    <th scope="col">Total Price</th>
-                                    <th scope="col">Remove</th>
-                                    <th scope="col">Operations</th>
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                                <?php
-                                getCartItem();
-                                ?>
-                            </tbody>
-                        </table>
+                if (!isset($_SESSION["username"])) {
+                    include "user_area/userLogin.php";
+                } else {
+                    include "payment.php";
+                }
 
-                        <div class="container">
-                            <div class="d-flex">
 
-                                <h4 class="px-4">
-                                    Total price: <strong><?php getTotalPrice(); ?></strong>
-                                </h4>
-                                <a class="btn btn-primary mr-2" href="index.php">
-                                    countinue Shopping
-                                </a>
-                                <a class="btn btn-primary" href="checkout.php" >
-                                    Checkout
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                ?>
 
-                </div>
             </div>
 
         </div>
