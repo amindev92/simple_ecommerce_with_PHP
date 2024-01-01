@@ -3,9 +3,9 @@
 include_once("config/database.php");
 include_once("helpers/commonFunction.php");
 
-session_start();
-?>
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +16,24 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Mobocom Store</title>
+    <title>checkout</title>
+    <style>
+        .logo {
+            width: 48px;
+            height: 48px;
+        }
+
+
+
+        footer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 5rem;
+            bottom: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,7 +51,7 @@ session_start();
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                        <li class="nav-item">
+                        <li class="nav-item ">
                             <a class="nav-link active" aria-current="page" href="/mobocom">Home</a>
                         </li>
                         <li class="nav-item">
@@ -70,65 +85,12 @@ session_start();
         </nav>
         <!-- End of Navbar -->
 
+        <div class="container">
 
-        <!--  Second Nav -->
-        <nav class="navbar navbar-expand-lg bg-warning">
-            <div class="container-fluid">
-                <?php if (isset($_SESSION["user_name"])) : ?>
-                    <p class="text-light mb-0">
-                        Welcome <?php echo $_SESSION["user_name"]; ?>
-                    </p>
-                    <a href="user_area/logout.php" class="nav-link p-0">Logout</a>
-                <?php else : ?>
-                    <p> Welcome Ghost</p>
-                    <a href="user_area/userLogin.php" class="nav-link p-0">Login</a>
-                <?php endif; ?>
+            
 
-            </div>
-        </nav>
-        <!-- End Second nav -->
-
-        <!-- Container Section -->
-
-        <div class="row mt-4">
-            <div class="col-md-10 me-auto ">
-                <div class="row">
-                    <?php
-                    get_uniqe_brand();
-                    get_uniqe_category();
-                    getProducts();
-                    addToCart();
-
-                    ?>
-
-
-                </div>
-
-            </div>
-            <div class="col-md-2 bg-primary-subtle p-0">
-                <div class="brands">
-                    <h4 class="bg-secondary text-light text-center p-2">Brands</h4>
-                    <ul class="navbar-nav me-auto mb-2 text-center">
-                        <?php
-                        getBrands();
-
-                        ?>
-
-                    </ul>
-
-                </div>
-                <div class="categories">
-                    <h4 class="bg-secondary text-light text-center p-2">Categories</h4>
-                    <ul class="navbar-nav me-auto mb-2 text-center">
-                        <?php
-                        getCategories();
-
-                        ?>
-
-                    </ul>
-                </div>
-            </div>
         </div>
+        
 
 
         <!-- Footer -->

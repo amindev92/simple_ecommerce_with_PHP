@@ -3,6 +3,8 @@
 include_once("../config/database.php");
 include_once("../helpers/commonFunction.php");
 
+session_start();
+
 if (isset($_POST["registerUser"])) {
     $user_name = $_POST["user_name"];
     $user_email = $_POST["user_email"];
@@ -121,10 +123,15 @@ if (isset($_POST["registerUser"])) {
         <!--  Second Nav -->
         <nav class="navbar navbar-expand-lg bg-warning">
             <div class="container-fluid">
-                <p class="text-light mb-0">
-                    Welcome ghost
-                </p>
-                <a href="userLogin.php" class="nav-link p-0">Login</a>
+            <?php if (isset($_SESSION["user_name"])) : ?>
+                    <p class="text-light mb-0">
+                        Welcome <?php echo $_SESSION["user_name"]; ?>
+                    </p>
+                    <a href="logout.php" class="nav-link p-0">Logout</a>
+                <?php else : ?>
+                    <p> Welcome Ghost</p>
+                    <a href="userLogin.php" class="nav-link p-0">Login</a>
+                <?php endif; ?>
             </div>
         </nav>
         <!-- End Second nav -->

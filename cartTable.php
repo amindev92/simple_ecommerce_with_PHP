@@ -3,6 +3,8 @@
 include_once("config/database.php");
 include_once("helpers/commonFunction.php");
 
+session_start();
+
 if (isset($_POST["updateCartItem"]) and is_numeric($_POST["updateCartItem"])) {
 
     global $conn;
@@ -127,10 +129,15 @@ if (isset($_POST["removeCartItem"])) {
         <!--  Second Nav -->
         <nav class="navbar navbar-expand-lg bg-warning">
             <div class="container-fluid">
-                <p class="text-light mb-0">
-                    Welcome ghost
-                </p>
-                <a href="user_area/userLogin.php" class="nav-link p-0">Login</a>
+            <?php if (isset($_SESSION["user_name"])) : ?>
+                    <p class="text-light mb-0">
+                        Welcome <?php echo $_SESSION["user_name"]; ?>
+                    </p>
+                    <a href="user_area/logout.php" class="nav-link p-0">Logout</a>
+                <?php else : ?>
+                    <p> Welcome Ghost</p>
+                    <a href="user_area/userLogin.php" class="nav-link p-0">Login</a>
+                <?php endif; ?>
             </div>
         </nav>
         <!-- End Second nav -->

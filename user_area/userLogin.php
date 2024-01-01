@@ -3,6 +3,8 @@
 include_once("../config/database.php");
 include_once("../helpers/commonFunction.php");
 
+@session_start();
+
 if (isset($_POST["userlogin"])) {
 
     $user_email = $_POST["user_email"];
@@ -23,11 +25,11 @@ if (isset($_POST["userlogin"])) {
             if ($rowCountOfUserData == 1 and $rowCountOfCart == 0) {
                 $_SESSION["user_name"] = $fetchUserData["user_name"];
                 echo "<script>alert('login successfully!')</script>";
-                echo "<script>window.open('user_area/profile.php', '_self')</script>";
+                echo "<script>window.open('profile.php', '_self')</script>";
             } else {
                 $_SESSION["user_name"] = $fetchUserData["user_name"];
                 echo "<script>alert('login successfully!')</script>";
-                echo "<script>window.open('payment.php', '_self')</script>";
+                echo "<script>window.open('../payment.php', '_self')</script>";
             }
         } else {
             echo "<script>alert('Invalid Credential!')</script>";
@@ -107,7 +109,7 @@ if (isset($_POST["userlogin"])) {
                                 <i class="fa fa-shopping-cart" aria-hidden="true">
                                     <sup><?php getNumberOfProduct(); ?></sup>
                                 </i>
-                            </a>
+                            </a> 
                         </li>
                         <li class="nav-item border border-light">
                             <a class="nav-link text-light" href="/register">
