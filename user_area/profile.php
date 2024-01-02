@@ -111,9 +111,9 @@ session_start();
         <!-- Container Section -->
 
         <div class="row mt-4">
-            <div class="col-md-8 me-auto ">
-                <div class="row">
-
+            <div class="col-md-8 me-auto p-4 ">
+                <div class="row me-auto w-75">
+                    <?php get_user_orders(); ?>
 
                 </div>
 

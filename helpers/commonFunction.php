@@ -1,5 +1,26 @@
 <?php
 
+function get_user_orders(){
+
+    global $conn;
+    $user_name = $_SESSION["user_name"];
+    $selectUserQuery = "SELECT * FROM person WHERE user_name = '$user_name'";
+    $resultSelectUserQuery = mysqli_query($conn, $selectUserQuery);
+    $userInfo = mysqli_fetch_array($resultSelectUserQuery);
+    $user_id = $userInfo["user_id"];
+
+    $selectOrderQuery = "SELECT * FROM order_pending WHERE user_id = '$user_id'";
+    $resultSelectOrderQuery = mysqli_query($conn, $selectOrderQuery);
+    $orderItem = mysqli_fetch_array($resultSelectOrderQuery);
+    $numberOfOrderItems = mysqli_num_rows($resultSelectOrderQuery);
+    if ($numberOfOrderItems > 0) {
+        echo "<p>you have $numberOfOrderItems order.</p>";
+    }else{
+        echo "<p>you dont have any order - $user_id .</p>";
+    }
+
+}
+
 function getCartItem()
 {
 
