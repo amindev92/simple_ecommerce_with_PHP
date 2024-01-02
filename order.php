@@ -3,6 +3,52 @@
 include_once("config/database.php");
 include_once("helpers/commonFunction.php");
 
+if (isset($_GET["user_id"]) and is_numeric($_GET["user_id"])) {
+    $user_id = $_GET["user_id"];
+}
+
+$userIp_address = getIPAddress();
+$totalPrice = 0;
+$selectCartQuery = "SELECT * FROM cart_details WHERE user_ip_address = '$userIp_address'";
+$resultCartQuery = mysqli_query($conn, $selectCartQuery);
+$countProductOfCartQuery = mysqli_num_rows($resultCartQuery);
+$invoice_number = mt_rand();
+$status = "pending";
+while ($CartItems = mysqli_fetch_array($resultCartQuery)) {
+    $quantitiesProduct = $CartItems["quantities"];
+    $product_id = $CartItems["product_id"];
+    $selectProductQuery = "SELECT * FROM products WHERE product_id = '$product_id'";
+    $resultProductQuery = mysqli_query($conn, $selectProductQuery);
+    $prodcutItem = mysqli_fetch_array($resultProductQuery);
+    $productPrice = $prodcutItem["product_price"];
+    $totalPrice += $productPrice * $quantitiesProduct;
+    $invoiceNumber_product = mt_rand();
+    $insertOrderPendingQuery = "
+    INSERT INTO `order_pending` (`user_id`, `invoice_number`, `product_id`, `quantities`, `order_status`) VALUES ('$user_id', '$invoiceNumber_product', '$product_id', '$quantitiesProduct', '$status');
+    ";
+    $resultOrderPendingQuery = mysqli_query($conn, $insertOrderPendingQuery);
+};
+
+
+// $selectAllCartQuery = "SELECT * FROM cart_details";
+// $resultAllCartQuery = mysqli_query($conn, $selectAllCartQuery);
+// $cartItem = mysqli_fetch_array($resultAllCartQuery);
+// $qunatityCartItem = $cartItem["quantities"];
+// if ($qunatityCartItem == 1) {
+//     $subTotalPrice = $totalPrice;
+// } else {
+//     $subTotalPrice = $totalPrice * $qunatityCartItem;
+// };
+
+
+$insertOrderQuery = "INSERT INTO `user_orders` (`user_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`) VALUES ('$user_id', '$subTotalPrice', '$invoice_number', '$countProductOfCartQuery', NOW(), '$status')";
+$resultInsertOrderQuery = mysqli_query($conn, $insertOrderQuery);
+if ($resultInsertOrderQuery) {
+    echo "<script>alert('order submit successfully)</script>";
+    echo "<script>window.open('index.php', '_self');</script>";
+}
+
+
 
 
 ?>
@@ -87,10 +133,10 @@ include_once("helpers/commonFunction.php");
 
         <div class="container">
 
-            
+
 
         </div>
-        
+
 
 
         <!-- Footer -->
