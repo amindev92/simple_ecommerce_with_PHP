@@ -113,7 +113,20 @@ session_start();
         <div class="row mt-4">
             <div class="col-md-8 me-auto p-4 ">
                 <div class="row me-auto w-75">
-                    <?php get_user_orders(); ?>
+                    <?php
+                    if (!isset($_GET["edit_account"])) {
+                        if (!isset($_GET["my_orders"])) {
+                            if (!isset($_GET["delete_account"])) {
+                                get_user_orders();
+                            }
+                        }
+                    }
+
+                    if (isset($_GET["edit_account"])) {
+
+                        include "editAccount.php";
+                    }
+                   ?>
 
                 </div>
 
