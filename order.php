@@ -41,13 +41,15 @@ while ($CartItems = mysqli_fetch_array($resultCartQuery)) {
 // };
 
 
-$insertOrderQuery = "INSERT INTO `user_orders` (`user_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`) VALUES ('$user_id', '$subTotalPrice', '$invoice_number', '$countProductOfCartQuery', NOW(), '$status')";
+$insertOrderQuery = "INSERT INTO `user_orders` (`user_id`, `amount_due`, `invoice_number`, `total_products`, `order_date`, `order_status`) VALUES ('$user_id', '$totalPrice', '$invoice_number', '$countProductOfCartQuery', NOW(), '$status')";
 $resultInsertOrderQuery = mysqli_query($conn, $insertOrderQuery);
 if ($resultInsertOrderQuery) {
     echo "<script>alert('order submit successfully)</script>";
     echo "<script>window.open('index.php', '_self');</script>";
 }
 
+$truncateCartDetails = "TRUNCATE TABLE `mobocom_store`.`cart_details`";
+$runTruncateCartTable = mysqli_query($conn, $truncateCartDetails);
 
 
 
@@ -104,8 +106,13 @@ if ($resultInsertOrderQuery) {
                             <a class="nav-link text-light" href="#">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/mobocom/user_area/userRegister.php">Register</a>
-                        </li>
+                        <?php 
+                            if (isset($_SESSION["user_name"])) {
+                                echo " <a class='nav-link text-light' href='/mobocom/user_area/profile.php'>My Account</a>";
+                            }else{
+                                echo " <a class='nav-link text-light' href='/mobocom/user_area/userRegister.php'>Register</a>";
+                            }
+                           ?>                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="#">Contact</a>
                         </li>

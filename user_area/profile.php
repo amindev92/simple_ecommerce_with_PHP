@@ -25,7 +25,7 @@ session_start();
             height: 48px;
         }
 
-        .user_img{
+        .user_img {
             width: 100px;
             height: 100px;
             object-fit: contain;
@@ -63,8 +63,13 @@ session_start();
                             <a class="nav-link text-light" href="#">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/mobocom/user_area/userRegister.php">Register</a>
-                        </li>
+                            <?php
+                            if (isset($_SESSION["user_name"])) {
+                                echo " <a class='nav-link text-light' href='/mobocom/user_area/profile.php'>My Account</a>";
+                            } else {
+                                echo " <a class='nav-link text-light' href='/mobocom/user_area/userRegister.php'>Register</a>";
+                            }
+                            ?> </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="#">Contact</a>
                         </li>
@@ -125,8 +130,11 @@ session_start();
                     if (isset($_GET["edit_account"])) {
 
                         include "editAccount.php";
+                    } else if (isset($_GET["my_orders"])) {
+                        include "userOrders.php";
+
                     }
-                   ?>
+                    ?>
 
                 </div>
 
