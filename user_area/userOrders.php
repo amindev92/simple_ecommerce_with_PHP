@@ -22,30 +22,35 @@
 
         $selectOrderQuery = "SELECT * FROM user_orders WHERE user_id = '$user_id'";
         $fetchOrderQuery = mysqli_query($conn, $selectOrderQuery);
-        $numberOrders = mysqli_num_rows($fetchOrderQuery);
-        $personInfo = mysqli_fetch_array($fetchOrderQuery);
         // if ($numberOrders > 0) {
-            while ($personInfo = mysqli_fetch_array($fetchOrderQuery)) {
-                $amount_due = $personInfo["amount_due"];
-                $totalProducts = $personInfo["total_products"];
-                $invoiceNumber = $personInfo["invoice_number"];
-                $date = $personInfo["order_date"];
-                $status = $personInfo["order_status"];
+        while ($orderInfo = mysqli_fetch_array($fetchOrderQuery)) {
+            $amount_due = $orderInfo["amount_due"];
+            $totalProducts = $orderInfo["total_products"];
+            $invoiceNumber = $orderInfo["invoice_number"];
+            $date = $orderInfo["order_date"];
+            $status = $orderInfo["order_status"];
+            $order_id = $orderInfo["order_id"];
 
-                echo "
-                <tr>
-                    <th scope='row'>$counter</th>
-                    <td>$amount_due</td>
-                    <td>$totalProducts</td>
-                    <td>$invoiceNumber</td>
-                    <td>$date</td>
-                    <td>$status</td>
-                    <td>        <a href='confirmPayment.php' class='text-secondary'>Confirm</a>
-                    </td>
-                </tr>
-                ";
+            echo "<tr>
+                        <th scope='row'>$counter</th>
+                        <td>$amount_due</td>
+                        <td>$totalProducts</td>
+                        <td>$invoiceNumber</td>
+                        <td>$date</td>
+                        <td>$status</td>";
+
+            if ($status == "complete") {
+                echo "<td> <a href='#' class='text-secondary'>Paid</a>
+                            </td>
+                         </tr>";
+                $counter++;
+            } else {
+                echo "<td> <a href='confirmPayment.php?order_id=$order_id' class='text-secondary'>Confirm</a>
+                            </td>
+                         </tr>";
                 $counter++;
             }
+        }
         // }
 
         ?>
