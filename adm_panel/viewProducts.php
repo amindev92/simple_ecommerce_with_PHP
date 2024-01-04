@@ -1,4 +1,6 @@
-<form action="" method="post">
+<!-- <?php 
+include_once("../helpers/commonFunction.php");
+?> -->
     <table class="table">
         <thead>
             <tr>
@@ -24,4 +26,3 @@ displayProducts();
     </table>
 
 
-</form>

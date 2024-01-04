@@ -1,4 +1,5 @@
 <?php
+include_once("../config/database.php");
 
 function displayProducts()
 {
@@ -27,7 +28,7 @@ function displayProducts()
         <td>$rowCountOrder</td>
         <td>$status</td>
         <td>
-             <input type='submit' name='edit=$product_id' value='Edit'>
+        <a href='index.php?editproduct' class='fa-pen-to-square'>Edit</a>
         </td>
         <td>
              <input type='submit' name='remove=$product_id' value='Remove'>

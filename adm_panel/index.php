@@ -1,7 +1,7 @@
 <?php
 
-include_once("../helpers/commonFunction.php");
 include_once("../config/database.php");
+include_once("../helpers/commonFunction.php");
 
 if (isset($_POST["categoryName"]) && strlen($_POST["categoryName"]) > 0) {
     $categoryTitle = $_POST["categoryName"];
@@ -60,7 +60,7 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         .logo {
@@ -73,16 +73,18 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
             height: 100px;
             object-fit: contain;
         }
-.productImg{
-    width: 50px;
-    height: 50px;
-}
+
+        .productImg {
+            width: 50px;
+            height: 50px;
+        }
+
         footer {
             position: absolute;
-            bottom: 0;
             left: 0;
             right: 0;
-
+            height: 5rem;
+            bottom: 0;
         }
     </style>
 </head>
@@ -112,6 +114,9 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
                 }
                 if (isset($_GET["view_products"])) {
                     include_once("viewProducts.php");
+                }
+                if (isset($_GET["editproduct"])) {
+                    include_once("editProduct.php");
                 }
                 ?>
 
