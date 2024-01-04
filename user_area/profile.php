@@ -133,6 +133,8 @@ session_start();
                     } else if (isset($_GET["my_orders"])) {
                         include "userOrders.php";
 
+                    }else if(isset($_GET["delete_account"])) {
+                        include "userDelete.php";
                     }
                     ?>
 
