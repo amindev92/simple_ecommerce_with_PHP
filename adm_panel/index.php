@@ -1,5 +1,6 @@
 <?php
 
+include_once("../helpers/commonFunction.php");
 include_once("../config/database.php");
 
 if (isset($_POST["categoryName"]) && strlen($_POST["categoryName"]) > 0) {
@@ -7,7 +8,7 @@ if (isset($_POST["categoryName"]) && strlen($_POST["categoryName"]) > 0) {
     $allCategorycommand = "SELECT * FROM categories WHERE category_title = '$categoryTitle'";
     $result = mysqli_query($conn, $allCategorycommand);
     $numbers =  mysqli_num_rows($result);
-    if ( $numbers > 0) {
+    if ($numbers > 0) {
         echo "<script>alert(New record created successfully)</script>";
     } else {
         $sqlCommand = "INSERT INTO categories (category_title) VALUES ('$categoryTitle')";
@@ -26,7 +27,7 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
     $allBrandscommand = "SELECT * FROM brands WHERE brand_title = '$brandTitle'";
     $result = mysqli_query($conn, $allBrandscommand);
     $numbers =  mysqli_num_rows($result);
-    if ( $numbers > 0) {
+    if ($numbers > 0) {
         echo "<script>alert(New record created successfully)</script>";
     } else {
         $sqlCommand = "INSERT INTO brands (brand_title) VALUES ('$brandTitle')";
@@ -72,7 +73,10 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
             height: 100px;
             object-fit: contain;
         }
-
+.productImg{
+    width: 50px;
+    height: 50px;
+}
         footer {
             position: absolute;
             bottom: 0;
@@ -106,6 +110,9 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
                 if (isset($_GET["insert_brands"])) {
                     include_once("insertBrands.php");
                 }
+                if (isset($_GET["view_products"])) {
+                    include_once("viewProducts.php");
+                }
                 ?>
 
             </div>
@@ -120,7 +127,7 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
                         <a class="nav-link" href="productForm.php">Insert products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">View Products</a>
+                        <a class="nav-link" href="index.php?view_products">View Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?insert_categories">Insert Categories</a>

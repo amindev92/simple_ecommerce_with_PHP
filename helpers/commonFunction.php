@@ -1,6 +1,43 @@
 <?php
 
-function get_user_orders(){
+function displayProducts()
+{
+
+    global $conn;
+    $selectProductQuery = "SELECT * FROM products";
+    $resultProductQuery = mysqli_query($conn, $selectProductQuery);
+    while ($rowProduct = mysqli_fetch_array($resultProductQuery)) {
+        $product_id = $rowProduct["product_id"];
+        $product_name = $rowProduct["product_title"];
+        $product_price = $rowProduct["product_price"];
+        $product_img = $rowProduct["product_image1"];
+        $status = $rowProduct["status"];
+        echo "<tr>
+        <td>$product_id</td>
+        <td>$product_name</td>
+        <td>$product_price</td>
+        <td>
+            <img src='products_image/$product_img' alt='$product_name' class='productImg'>
+        </td>
+        ";
+        $selectProductOrderQuery = "SELECT * FROM `order_pending` WHERE product_id = '$product_id'";
+        $resultOrderQuery = mysqli_query($conn, $selectProductOrderQuery);
+        $rowCountOrder = mysqli_num_rows($resultOrderQuery);
+        echo "
+        <td>$rowCountOrder</td>
+        <td>$status</td>
+        <td>
+             <input type='submit' name='edit=$product_id' value='Edit'>
+        </td>
+        <td>
+             <input type='submit' name='remove=$product_id' value='Remove'>
+        </td>
+        ";
+    };
+}
+
+function get_user_orders()
+{
 
     global $conn;
     $user_name = $_SESSION["user_name"];
@@ -15,10 +52,9 @@ function get_user_orders(){
     $numberOfOrderItems = mysqli_num_rows($resultSelectOrderQuery);
     if ($numberOfOrderItems > 0) {
         echo "<p>you have $numberOfOrderItems order.</p>";
-    }else{
+    } else {
         echo "<p>you dont have any order - $user_id .</p>";
     }
-
 }
 
 function getCartItem()
@@ -34,11 +70,11 @@ function getCartItem()
         $result = mysqli_query($conn, $selectProductQuery);
         $product = mysqli_fetch_array($result);
         // while ($product = mysqli_fetch_array($result)) {
-            $productId = $product["product_id"];
-            $productTitle = $product["product_title"];
-            $productImg = $product["product_image1"];
-            $productPrice = $product["product_price"];
-            echo "
+        $productId = $product["product_id"];
+        $productTitle = $product["product_title"];
+        $productImg = $product["product_image1"];
+        $productPrice = $product["product_price"];
+        echo "
                 <tr>
                     <td>$productTitle</td>
                     <td>
@@ -58,9 +94,9 @@ function getCartItem()
                     </td>
                 </tr>
     ";
-        }
+    }
     // }
-    
+
 }
 
 function getTotalPrice()
@@ -84,7 +120,6 @@ function getTotalPrice()
         // }
     }
     echo $totalPrice;
-   
 }
 
 function getNumberOfProduct()
@@ -96,7 +131,6 @@ function getNumberOfProduct()
     $result = mysqli_query($conn, $selectProducts);
     $numberOfRows = mysqli_num_rows($result);
     echo $numberOfRows;
-   
 }
 
 function addToCart()
@@ -119,7 +153,6 @@ function addToCart()
             echo "<script>window.open('index.php', '_self')</script>";
         }
     }
-   
 }
 
 
@@ -187,7 +220,6 @@ function viewProduct()
     </div>
                             ";
     }
-   
 }
 
 
@@ -227,7 +259,6 @@ function searchProducts()
             }
         }
     }
-  
 }
 
 function get_uniqe_category()
@@ -266,7 +297,6 @@ function get_uniqe_category()
             }
         }
     }
-  
 }
 
 function get_uniqe_brand()
@@ -305,7 +335,6 @@ function get_uniqe_brand()
             }
         }
     }
-  
 }
 
 function getCategories()
@@ -322,7 +351,6 @@ function getCategories()
     </li>
     ";
     }
-  
 }
 
 function getBrands()
@@ -340,7 +368,6 @@ function getBrands()
                         </li>
                         ";
     }
-   
 }
 
 function getProducts()
@@ -375,5 +402,4 @@ function getProducts()
                             ";
         }
     }
-   
 }
