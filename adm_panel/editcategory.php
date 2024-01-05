@@ -21,3 +21,4 @@ if ($result) {
         <button type="submit" name="editcategory" class="btn btn-primary">Submit</button>
     </div>
 </form>
+
