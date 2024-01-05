@@ -115,12 +115,38 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
                 if (isset($_GET["view_products"])) {
                     include_once("viewProducts.php");
                 }
+                if (isset($_GET["view_categories"])) {
+                    include_once("viewCategories.php");
+                }
                 if (isset($_GET["editproduct"])) {
                     include_once("editProduct.php");
+                }
+                if (isset($_GET["view_brands"])) {
+                    include_once("viewBrands.php");
                 }
                 if (isset($_GET["removeproduct"])) {
                     $product_id = $_GET["removeproduct"];
                     $deleteProductQuery = "DELETE FROM products WHERE product_id = '$product_id'";
+                    $result = mysqli_query($conn, $deleteProductQuery);
+                    if($result){
+                        echo "<script>alert('Delete successfully')</script>";
+                    }else{
+                        echo "<script>alert('Error in delete products')</script>";
+                    }
+                };
+                if (isset($_GET["removeCategory"])) {
+                    $category_id = $_GET["removeCategory"];
+                    $deleteProductQuery = "DELETE FROM categories WHERE category_id = '$category_id'";
+                    $result = mysqli_query($conn, $deleteProductQuery);
+                    if($result){
+                        echo "<script>alert('Delete successfully')</script>";
+                    }else{
+                        echo "<script>alert('Error in delete products')</script>";
+                    }
+                };
+                if (isset($_GET["removebrand"])) {
+                    $brand_id = $_GET["removebrand"];
+                    $deleteProductQuery = "DELETE FROM brands WHERE brand_id = '$brand_id'";
                     $result = mysqli_query($conn, $deleteProductQuery);
                     if($result){
                         echo "<script>alert('Delete successfully')</script>";
@@ -148,13 +174,13 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
                         <a class="nav-link" href="index.php?insert_categories">Insert Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">View Categories</a>
+                        <a class="nav-link" href="index.php?view_categories">View Categories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?insert_brands">Insert Brands</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">View Brands</a>
+                        <a class="nav-link" href="index.php?view_brands">View Brands</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">All orders</a>
