@@ -13,12 +13,11 @@ if (isset($_POST["updateProduct"])) {
     $product_image2 = $_FILES["product_image2"]["name"];
     $product_image3 = $_FILES["product_image3"]["name"];
     $product_price = $_POST["productPrice"];
-    $status = "true";
 
     $product_image1_temp = $_FILES["product_image1"]["tmp_name"];
     $product_image2_temp = $_FILES["product_image2"]["tmp_name"];
     $product_image3_temp = $_FILES["product_image3"]["tmp_name"];
-    
+
 
     if ($product_title == "" || $product_description == "" || $product_keywords == "" || $product_image1 == "" or $product_image2 == "" or $product_image3 == "") {
         echo    "<script>alert('Please Fill input')</script>";
@@ -28,7 +27,8 @@ if (isset($_POST["updateProduct"])) {
         move_uploaded_file($product_image2_temp, "./products_image/$product_image2");
         move_uploaded_file($product_image3_temp, "./products_image/$product_image3");
 
-        $sqlCommand = "INSERT INTO products (product_title, product_description, product_keywords, category_id, brand_id, product_image1, product_image2, product_image3, product_price, date, status ) VALUES ('$product_title', '$product_description', '$product_keywords', '$category_id', '$brands_id', '$product_image1', '$product_image2', '$product_image3', '$product_price', NOW(), $status)";
+        $sqlCommand = "UPDATE `products` SET `product_title` = '$product_title', `product_description` = '$product_description', `product_keywords` = '$product_keywords', 'category_id' = '$category_id', 'brands_id' = '$brands_id', 'product_image1' = '$product_image1' , 'product_image2' = '$product_image2', 'product_image3' = '$product_image3', 'product_price' = '$product_price' WHERE `products`.`product_id` = 1;
+        ";
 
         $result = mysqli_query($conn, $sqlCommand);
         if ($result > 0) {
