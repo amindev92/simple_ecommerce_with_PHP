@@ -121,6 +121,12 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
                 if (isset($_GET["editproduct"])) {
                     include_once("editProduct.php");
                 }
+                if (isset($_GET["editcategory"])) {
+                    include_once("editcategory.php");
+                }
+                if (isset($_GET["editbrand"])) {
+                    include_once("editbrand.php");
+                }
                 if (isset($_GET["view_brands"])) {
                     include_once("viewBrands.php");
                 }
