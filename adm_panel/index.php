@@ -118,6 +118,16 @@ if (isset($_POST["brandName"]) && strlen($_POST["brandName"]) > 0) {
                 if (isset($_GET["editproduct"])) {
                     include_once("editProduct.php");
                 }
+                if (isset($_GET["removeproduct"])) {
+                    $product_id = $_GET["removeproduct"];
+                    $deleteProductQuery = "DELETE FROM products WHERE product_id = '$product_id'";
+                    $result = mysqli_query($conn, $deleteProductQuery);
+                    if($result){
+                        echo "<script>alert('Delete successfully')</script>";
+                    }else{
+                        echo "<script>alert('Error in delete products')</script>";
+                    }
+                };
                 ?>
 
             </div>

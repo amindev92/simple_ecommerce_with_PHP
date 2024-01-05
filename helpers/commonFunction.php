@@ -31,7 +31,7 @@ function displayProducts()
         <a href='index.php?editproduct' class='fa-pen-to-square'>Edit</a>
         </td>
         <td>
-             <input type='submit' name='remove=$product_id' value='Remove'>
+        <a href='index.php?removeproduct=$product_id' class='fa-pen-to-square'>Remove</a>
         </td>
         ";
     };
